@@ -97,9 +97,6 @@ dist
 # FuseBox cache
 .fusebox/
 
-# angular cache
-.angular/
-
 # DynamoDB Local files
 .dynamodb/
 

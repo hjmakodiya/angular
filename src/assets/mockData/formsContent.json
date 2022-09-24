@@ -1,0 +1,57 @@
+{
+  "departments": {
+    "pageTitle": "Departments",
+    "formFields": [
+      {
+        "key": "name",
+        "label": "Name : ",
+        "input": "text",
+        "default":"Machine Learning",
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please enter department name"
+          }
+        ]
+      },
+      {
+        "key": "floor",
+        "label": "Floor : ",
+        "input": "select",
+        "default":"1",
+        "values": [
+          {"label": "1st Floor", "value":"1"},
+          {"label": "2nd Floor", "value":"2"},
+          {"label": "3rd Floor", "value":"3"}
+        ],
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please select floor"
+          }
+        ]
+      },
+      {
+        "key": "is_active",
+        "label": "Is Active ? : ",
+        "input": "select",
+        "default":"yes",
+        "values": [
+          {"label": "Yes", "value":"yes"},
+          {"label": "No", "value":"no"}
+        ],
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please select activation status"
+          }
+        ]
+      }
+    ],
+    "gridColumn" : {
+      "1:name" : "Name",
+      "2:floor" : "Floor",
+      "3:is_active" : "Is Active"
+    }
+  }
+}
