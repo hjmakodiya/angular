@@ -1,7 +1,5 @@
 <div class="department-wrapper">
-
   <app-title [parentData]="title"></app-title>
-  <app-custom-form [parentData]="customFormInputs"></app-custom-form>
-  <app-grid [parentData]="gridColumns"></app-grid>
-
+  <app-custom-form [parentData]="customFormInputs" [apiPathRoute]="apiPath"></app-custom-form>
+  <app-grid [parentData]="gridColumns" [apiPathRoute]="apiPath"></app-grid>
 </div>

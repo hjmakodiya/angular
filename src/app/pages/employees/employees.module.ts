@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeesComponent } from './employees.component';
+import { SharedModule } from 'src/app/shared/module/shared.module';
 
 const routes: Routes = [
   {path: "", component: EmployeesComponent}
@@ -11,8 +12,12 @@ const routes: Routes = [
   declarations: [EmployeesComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ],
-  exports:[EmployeesComponent]
+  exports:[EmployeesComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class EmployeesModule { }

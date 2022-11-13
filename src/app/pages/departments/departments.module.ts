@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { DepartmentsComponent } from './departments.component';
-import { FormComponent } from './form/form.component';
 import { SharedModule } from 'src/app/shared/module/shared.module';
 
 const routes: Routes = [
@@ -11,8 +10,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DepartmentsComponent, 
-    FormComponent
+    DepartmentsComponent,
   ],
   imports: [
     CommonModule,

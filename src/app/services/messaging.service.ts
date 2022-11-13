@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,6 +10,7 @@ export class MessagingService {
 
   private alertmsg = new BehaviorSubject<any>({});
   private keepAfterNavigationChange = false;
+  public editDeleteIdEvent = new EventEmitter<{id:string, isEdit: boolean}>();
 
   constructor(private router: Router) {
     // clear alert message on route change

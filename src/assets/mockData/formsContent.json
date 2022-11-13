@@ -52,6 +52,113 @@
       "1:name" : "Name",
       "2:floor" : "Floor",
       "3:is_active" : "Is Active"
-    }
+    },
+    "apiPath":"department"
+  },
+  "employees": {
+    "pageTitle": "Employees",
+    "formFields": [
+      {
+        "key": "name",
+        "label": "Name : ",
+        "input": "text",
+        "default":"Hemali Makodiya",
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please enter name"
+          }
+        ]
+      },
+      {
+        "key": "email",
+        "label": "Email : ",
+        "input": "text",
+        "default":"hemali@gmail.com",
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please enter email"
+          },
+          {
+            "valid": "email",
+            "error": "Please enter valid email"
+          }
+        ]
+      },
+      {
+        "key": "department",
+        "label": "Select Department : ",
+        "input": "select",
+        "values": [],
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please select department"
+          }
+        ]
+      },
+      {
+        "key": "gender",
+        "label": "Gender : ",
+        "input": "select",
+        "default":"male",
+        "values": [
+          {"label": "Male", "value":"male"},
+          {"label": "Female", "value":"female"}
+        ]
+      },
+      {
+        "key": "experience",
+        "label": "Experience(in year) : ",
+        "input": "number",
+        "default":"",
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please enter experience"
+          }
+        ]
+      },
+      {
+        "key": "salary",
+        "label": "Salary : ",
+        "input": "number",
+        "default":"",
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please enter salary"
+          }
+        ]
+      },
+      {
+        "key": "is_active",
+        "label": "Is Active ? : ",
+        "input": "select",
+        "default":"yes",
+        "values": [
+          {"label": "Yes", "value":"yes"},
+          {"label": "No", "value":"no"}
+        ],
+        "validation": [
+          {
+            "valid": "required",
+            "error": "Please select activation status"
+          }
+        ]
+      }
+    ],
+    "gridColumn":{
+      "1:name" : "Name",
+      "2:email" : "Email",
+      "3:department" : "Department",
+      "4:gender" : "Gender",
+      "5:experience" : "Experience",
+      "6:salary" : "Salary",
+      "7:is_active" : "Is Active"
+    },
+    "apiPath":"employee",
+    "foreignKeyTable" : "department"
   }
 }

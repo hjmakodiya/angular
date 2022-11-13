@@ -12,7 +12,6 @@ export class TitleComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("Inside title component");
   }
 
 }

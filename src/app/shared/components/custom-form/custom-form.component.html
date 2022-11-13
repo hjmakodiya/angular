@@ -7,10 +7,10 @@
           <form [formGroup]="customForm" (ngSubmit)="submitForm()">
             
             <div *ngFor="let form of customFormInputs; let i = index">
-              <div class="form-group" *ngIf="form.input == 'text'">
+              <div class="form-group" *ngIf="form.input == 'text' || form.input == 'number'">
                 <label [for]="form.key" class="control-label mb-1">{{form.label}}</label>
                 <input [type]="form.input" [id]="form.key" [name]="form.key" class="form-control" [formControlName]="form.key">
-                <div *ngIf="customForm.get(form.key)?.invalid">
+                <div *ngIf="customForm.get(form.key)?.invalid  && customForm.get(form.key)?.touched">
                   <div *ngFor="let err of form.validation; let k = index">
                     <small class="text-danger" *ngIf="customForm.get(form.key)?.errors?.[err.valid]">{{err.error}}</small>
                   </div>
@@ -24,7 +24,7 @@
                     {{item.label}}
                   </option>
                 </select>
-                <div *ngIf="customForm.get(form.key)?.invalid">
+                <div *ngIf="customForm.get(form.key)?.invalid && customForm.get(form.key)?.touched">
                   <div *ngFor="let err of form.validation; let k = index">
                     <small class="text-danger" *ngIf="customForm.get(form.key)?.hasError(err.valid)">{{err.error}}</small>
                   </div>
@@ -34,13 +34,11 @@
 
             <button type="submit"
                     class="btn btn-lg btn-info btn-block" 
-                    [disabled]="!customForm.valid"
+                    
                     >
                 <span>{{isEdit ? 'Update' : 'Save'}}</span>
             </button>
           </form>
-          <br>
-          <button  class="btn btn-lg btn-info btn-block"  (click)="editClick('63222d43b8452524ca4b2681')">edit </button>
         </div>
       </div>
     </div>

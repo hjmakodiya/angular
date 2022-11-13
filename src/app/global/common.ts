@@ -11,20 +11,22 @@ export class Common {
   generateFormInput(inputArray: any[]) {
     inputArray.forEach(element => {
       var validationArry: any[] = []
-      element.validation.forEach((errobj: any) => {
-        switch (errobj.valid) {
-          case "required":
-            validationArry.push(Validators.required)
-            break;
+      if (element.validation) {
+        element.validation.forEach((errobj: any) => {
+          switch (errobj.valid) {
+            case "required":
+              validationArry.push(Validators.required)
+              break;
 
-          case "email":
-            validationArry.push(Validators.email)
-            break;
+            case "email":
+              validationArry.push(Validators.email)
+              break;
 
-          default:
-            break;
-        }
-      });
+            default:
+              break;
+          }
+        });
+      }
       this.inputObject[element.key] = [element.default, validationArry]
     });
 

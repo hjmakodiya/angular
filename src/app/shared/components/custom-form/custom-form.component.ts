@@ -1,12 +1,12 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injectable, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Common } from 'src/app/global/common';
-import { DepartmentService } from 'src/app/services/department.service';
+import { ApiService } from 'src/app/services/api.service';
 import { MessagingService } from 'src/app/services/messaging.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 
 @Component({
   selector: 'app-custom-form',
@@ -16,6 +16,7 @@ import { MessagingService } from 'src/app/services/messaging.service';
 
 export class CustomFormComponent implements OnInit {
   @Input('parentData') public customFormInputs : any[];
+  @Input('apiPathRoute') public apiPath : string;
   
   public responseData : any[]
   public customForm: FormGroup
@@ -23,44 +24,38 @@ export class CustomFormComponent implements OnInit {
   public uniqueId : string
 
   constructor(
-    private apiServices : DepartmentService,
+    private apiServices : ApiService,
     private fb: FormBuilder,
     private msgServices : MessagingService,
     private common : Common) {
-      //this.customForm = this.fb.group(this.common.generateFormInput(this.customFormInputs2))
   }
 
   ngOnInit(): void {
-    this.getDepartmentList();
-    this.customForm = this.fb.group(this.common.generateFormInput(this.customFormInputs))
-  }
-
-  async getDepartmentList() {
-    await this.apiServices.getAllDepartments().subscribe(
-			response => {
-				this.responseData = response
-			}, error => {
-				this.msgServices.error(error, true)
-			}
-		)
+    this.customForm = this.fb.group(this.common.generateFormInput(this.customFormInputs));
+    this.msgServices.editDeleteIdEvent.subscribe(obj=>{
+      if (obj.isEdit) 
+        this.editClick(obj.id);
+      else 
+        this.deleteclick(obj.id);
+    })
   }
 
   submitForm() {
-    console.log("inside form submit this.isEdit====>", this.isEdit);
-    if (this.isEdit) {
-      this.apiServices.updateDepartment(this.uniqueId, this.customForm.value)
+    if (this.customForm.valid) {
+      if (this.isEdit) 
+        this.apiServices.updateData(this.apiPath, this.uniqueId, this.customForm.value)
+      else 
+        this.apiServices.addData(this.apiPath, this.customForm.value);
     } else {
-      this.apiServices.addDepartment(this.customForm.value);
+      this.customForm.markAllAsTouched();
     }
   }
 
   editClick(id : string) {
     this.isEdit = true
     this.uniqueId = id
-    console.log("editClcik this.customForm====>", this.customForm);
-    this.apiServices.getDepartmentById(id).subscribe(
+    this.apiServices.getDataById(this.apiPath, id).subscribe(
 			response => {
-				console.log("Inside getAllDepartments=====>", this);
         this.customForm.patchValue(response)
 			}, error => {
 				this.msgServices.error(error, true)
@@ -68,8 +63,8 @@ export class CustomFormComponent implements OnInit {
 		)
   }
 
-  deleteDepartment(id : string) {
-    alert("Are you sure you want to delete Department?")
-    this.apiServices.deleteDepartment(id);
+  deleteclick(id : string) {
+    alert(`Are you sure you want to delete ${this.apiPath}?`)
+    this.apiServices.deleteData(this.apiPath, id);
   }
 }

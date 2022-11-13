@@ -14,10 +14,10 @@
               <td>{{i}}</td>
               <td *ngFor="let column of gridColumns | keyvalue ">{{ data[column.key.split(":")[1]] }}</td>
               <td>
-                <button type="button" class="btn btn-md btn-info mr-3" (click)="editClcik(data._id)">
+                <button type="button" class="btn btn-md btn-info mr-3" (click)="editClick(data._id)">
                   <span>Edit</span>
                 </button>
-                <button type="button" class="btn btn-md btn-danger">
+                <button type="button" class="btn btn-md btn-danger" (click)="deleteClick(data._id)">
                   <span>Delete</span>
                 </button>
               </td>

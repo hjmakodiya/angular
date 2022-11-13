@@ -3,7 +3,22 @@ const Employee = require('../model/employees')
 module.exports = app => {
     app.get('/employee', async (req, res, next) => {
         try {
-            const result = await Employee.find();
+            //const result = await Employee.find();
+            const result = await Employee.aggregate([
+                {
+                  $lookup: {
+                    from: "departments", // collection name in db
+                    localField: "department",
+                    foreignField: "_id",
+                    as: "department"
+                  }
+                }
+            ])
+            
+            for (key in result) {
+                result[key].salary = result[key].salary.toString();
+                result[key].department = result[key].department[0].name;
+            }
             res.status(200).json(result)
         } catch (error) {
             next(error)
@@ -12,7 +27,8 @@ module.exports = app => {
 
     app.get('/employee/:id', async (req, res, next) => {
         try {
-            const result = await Employee.findById(req.params.id);
+            const result = await Employee.findById(req.params.id).lean();
+            result.salary = result.salary.toString();
             res.status(200).json(result)
         } catch (error) {
             next(error)

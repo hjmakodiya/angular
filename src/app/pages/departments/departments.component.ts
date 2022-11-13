@@ -11,6 +11,7 @@ export class DepartmentsComponent implements OnInit {
   public departmentContent : any = {};
   public title : string = "";
   public customFormInputs : any[] = [];
+  public apiPath : string
   public gridColumns : object 
 
   constructor() {
@@ -19,7 +20,8 @@ export class DepartmentsComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.departmentContent.pageTitle
-    this.customFormInputs = this.departmentContent.formFields
+    this.customFormInputs = this.departmentContent.formFields,
+    this.apiPath = this.departmentContent.apiPath
     this.gridColumns = this.departmentContent.gridColumn
   }
 }
